@@ -42,6 +42,6 @@ function newX(r,x,th){
   return cx = cos(radians(th)) * r + x;
 }
 
-function newY(int r,int y,float th){
+function newY(r,y,th){
   return cy = sin(radians(th)) * r + y;
 }
