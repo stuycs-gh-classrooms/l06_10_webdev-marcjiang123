@@ -46,8 +46,9 @@ return theta;
 }
 
 function clockFace(){
+  var c = #E8A1F2;
   stroke(0);
-  fill(#E8A1F2);
+  fill(c);
   circle(x,y,d);
 }
 
