@@ -1,6 +1,6 @@
-var hour;
-var minute;
-var second;
+var hourCount;
+var minuteCount;
+var secondCount;
 var theta;
 var d;
 var x;
@@ -14,34 +14,34 @@ function setup(){
   d = 400;
   x = width/2;
   y = height/2;
-  hour = hour();
-  minute = minute();
-  second = second();
+  hourCount = hour();
+  minuteCount = minute();
+  secondCount = second();
 }
 
 function draw(){
   background(255);
   updateTime();
   clockFace();
-  timeToAngle(hour,-1,-1);
-  drawHand(hour,-1,-1);
-  timeToAngle(-1,minute,-1);
-  drawHand(-1,minute,-1);
-  timeToAngle(-1,-1,second);
-  drawHand(-1,-1,second);
+  timeToAngle(hourCount,-1,-1);
+  drawHand(hourCount,-1,-1);
+  timeToAngle(-1,minuteCount,-1);
+  drawHand(-1,minuteCount,-1);
+  timeToAngle(-1,-1,secondCount);
+  drawHand(-1,-1,secondCount);
 }
 
 function timeToAngle(hour, minute, second){
-  if(hour>=0){
-    theta = (float(hour)*(PI/6.) * -1) + HALF_PI;
+  if(hourCount>=0){
+    theta = (float(hourCount)*(PI/6.) * -1) + HALF_PI;
   }
-  if(minute>=0){
-    theta = (float(minute)*(PI/30.) * -1) + HALF_PI;
+  if(minuteCount>=0){
+    theta = (float(minuteCount)*(PI/30.) * -1) + HALF_PI;
   }
-  if(second>=0){
-    theta = (float(second)*(PI/30.) * -1) + HALF_PI;
+  if(secondCount>=0){
+    theta = (float(secondCount)*(PI/30.) * -1) + HALF_PI;
   }
-println(hour);
+println(hourCount);
 return theta;
 }
 
@@ -52,22 +52,22 @@ function clockFace(){
   circle(x,y,d);
 }
 
-function drawHand(hour, minute, second){
-  if(hour>=0){
+function drawHand(hourCount, minuteCount, secondCount){
+  if(hourCount>=0){
     cx = cos(theta) * ((d/2)*.5) + x;
     cy = sin(-theta) * ((d/2)*.5) + y;
     stroke(0,255,0);
     strokeWeight(4);
     line(x,y,cx,cy);
   }
-  if(minute>=0){
+  if(minuteCount>=0){
     cx = cos(theta) * ((d/2)*.71) + x;
     cy = sin(-theta) * ((d/2)*.71) + y;
     stroke(0,0,255);
     strokeWeight(2);
     line(x,y,cx,cy);
   }
-  if(second>=0){
+  if(secondCount>=0){
     cx = cos(theta) * ((d/2)*.9) + x;
     cy = sin(-theta) * ((d/2)*.9) + y;
     stroke(255,0,0);
@@ -77,9 +77,9 @@ function drawHand(hour, minute, second){
 }
 
 function updateTime(){
-  hour = hour();
-  minute = minute();
-  second = second();
+  hourCount = hour();
+  minuteCount = minute();
+  secondCount = second();
 }
 
 function newX(d, x, th){
