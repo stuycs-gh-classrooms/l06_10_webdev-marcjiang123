@@ -1,47 +1,90 @@
+var hour;
+var minute;
+var second;
+var theta;
+var d;
+var x;
+var y;
 var cx;
 var cy;
-var theta;
-var radius;
-var centerX;
-var centerY;
-var cColor;
-var c;
 
 function setup(){
-  createCanvas(400,400);
-  radius = 100;
-  centerX = width/2;
-  centerY = height/2;
-  theta = 0.;
-  cColor = 0.;
-  c = 0;
-  fill(0,0,0);
+  createCanvas(500,500);
+  background(255);
+  d = 400;
+  x = width/2;
+  y = height/2;
+  hour = hour();
+  minute = minute();
+  second = second();
 }
 
 function draw(){
   background(255);
-  cx = newX(radius,centerX,theta);
-  cy = newY(radius,centerY,theta);
-  cColor++;
-  if (cColor % 60 == 0){
-    c+=10;
-    fill(0,c,0);
-  }
-  if (c > 255){
-    c = 0;
-    fill(0,c,0);
-  }
-    
-  circle(cx,cy,radius);
-  line(centerX,centerY,cx,cy);
-  theta++;
-  
-}
- 
-function newX(r,x,th){
-  return cx = cos(radians(th)) * r + x;
+  updateTime();
+  clockFace();
+  timeToAngle(hour,-1,-1);
+  drawHand(hour,-1,-1);
+  timeToAngle(-1,minute,-1);
+  drawHand(-1,minute,-1);
+  timeToAngle(-1,-1,second);
+  drawHand(-1,-1,second);
 }
 
-function newY(r,y,th){
-  return cy = sin(radians(th)) * r + y;
+function timeToAngle(hour, minute, second){
+  if(hour>=0){
+    theta = (float(hour)*(PI/6.) * -1) + HALF_PI;
+  }
+  if(minute>=0){
+    theta = (float(minute)*(PI/30.) * -1) + HALF_PI;
+  }
+  if(second>=0){
+    theta = (float(second)*(PI/30.) * -1) + HALF_PI;
+  }
+println(hour);
+return theta;
+}
+
+function clockFace(){
+  stroke(0);
+  fill(#E8A1F2);
+  circle(x,y,d);
+}
+
+function drawHand(hour, minute, second){
+  if(hour>=0){
+    cx = cos(theta) * ((d/2)*.5) + x;
+    cy = sin(-theta) * ((d/2)*.5) + y;
+    stroke(0,255,0);
+    strokeWeight(4);
+    line(x,y,cx,cy);
+  }
+  if(minute>=0){
+    cx = cos(theta) * ((d/2)*.71) + x;
+    cy = sin(-theta) * ((d/2)*.71) + y;
+    stroke(0,0,255);
+    strokeWeight(2);
+    line(x,y,cx,cy);
+  }
+  if(second>=0){
+    cx = cos(theta) * ((d/2)*.9) + x;
+    cy = sin(-theta) * ((d/2)*.9) + y;
+    stroke(255,0,0);
+    strokeWeight(1);
+    line(x,y,cx,cy);
+  }
+}
+
+function updateTime(){
+  hour = hour();
+  minute = minute();
+  second = second();
+}
+
+function newX(d, x, th){
+  return cx = cos(th) * d/2 + x;
+}
+
+function newY(d, y, th){
+  return cy = sin(-th) * d/2 + y;
 }
