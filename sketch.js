@@ -41,7 +41,6 @@ function timeToAngle(hour, minute, second){
   if(secondCount>=0){
     theta = (float(secondCount)*(PI/30.) * -1) + HALF_PI;
   }
-println(hourCount);
 return theta;
 }
 
