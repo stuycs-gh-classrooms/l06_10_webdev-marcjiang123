@@ -77,9 +77,9 @@ function drawHand(hour, minute, second){
 }
 
 function updateTime(){
-  hour = hour();
-  minute = minute();
-  second = second();
+  hour = getHours();
+  minute = getMinutes();
+  second = getSeconds();
 }
 
 function newX(d, x, th){
